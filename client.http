@@ -11,12 +11,11 @@ Content-Type: application/json
 }
 
 ###
-# @name create_account
-POST {{baseUrl}}/accounts
+# @name authenticate
+POST {{baseUrl}}/sessions
 Content-Type: application/json
 
 {
-	"name": "Joao Medeiros",
 	"email": "joao.medeiros@example.com",
 	"password": "123456"
 }
