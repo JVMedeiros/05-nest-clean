@@ -30,7 +30,7 @@ describe('Fetch Recent Questions (E2E)', () => {
         name: 'John Doe',
         email: 'johndoe@example.com',
         password: await hash('123456', 8),
-      }
+      },
     })
 
     const accessToken = jwt.sign({ sub: user.id })
@@ -41,21 +41,21 @@ describe('Fetch Recent Questions (E2E)', () => {
           title: 'Question 01',
           slug: 'question-01',
           content: 'Question content',
-          authorId: user.id
+          authorId: user.id,
         },
         {
           title: 'Question 02',
           slug: 'question-02',
           content: 'Question content',
-          authorId: user.id
+          authorId: user.id,
         },
         {
           title: 'Question 03',
           slug: 'question-03',
           content: 'Question content',
-          authorId: user.id
-        }
-      ]
+          authorId: user.id,
+        },
+      ],
     })
 
     const response = await request(app.getHttpServer())
@@ -68,8 +68,8 @@ describe('Fetch Recent Questions (E2E)', () => {
       questions: [
         expect.objectContaining({ title: 'Question 01' }),
         expect.objectContaining({ title: 'Question 02' }),
-        expect.objectContaining({ title: 'Question 03' })
-      ]
+        expect.objectContaining({ title: 'Question 03' }),
+      ],
     })
   })
 })
