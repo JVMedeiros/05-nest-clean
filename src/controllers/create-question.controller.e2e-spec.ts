@@ -30,7 +30,7 @@ describe('Create Question (E2E)', () => {
         name: 'John Doe',
         email: 'johndoe@example.com',
         password: await hash('123456', 8),
-      }
+      },
     })
 
     const accessToken = jwt.sign({ sub: user.id })
@@ -39,8 +39,8 @@ describe('Create Question (E2E)', () => {
       .post('/questions')
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
-        title: "New Question",
-        content: "Question Content"
+        title: 'New Question',
+        content: 'Question Content',
       })
 
     expect(response.statusCode).toBe(201)
