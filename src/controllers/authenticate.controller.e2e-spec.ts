@@ -27,7 +27,7 @@ describe('Authenticate (E2E)', () => {
         name: 'John Doe',
         email: 'johndoe@example.com',
         password: await hash('123456', 8),
-      }
+      },
     })
     const response = await request(app.getHttpServer()).post('/sessions').send({
       email: 'johndoe@example.com',
@@ -36,7 +36,7 @@ describe('Authenticate (E2E)', () => {
 
     expect(response.statusCode).toBe(201)
     expect(response.body).toEqual({
-      access_token: expect.any(String)
+      access_token: expect.any(String),
     })
   })
 })
