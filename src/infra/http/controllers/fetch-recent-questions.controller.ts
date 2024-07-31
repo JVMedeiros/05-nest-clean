@@ -18,7 +18,7 @@ type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>
 @Controller('/questions')
 @UseGuards(JwtAuthGuard)
 export class FetchRecentQuestionsController {
-  constructor(private fetchRecentQuestions: NestFetchQuestionsUseCase) { }
+  constructor(private fetchRecentQuestions: NestFetchQuestionsUseCase) {}
 
   @Get()
   async handle(@Query('page', queryValidationPipe) page: PageQueryParamSchema) {
