@@ -13,7 +13,7 @@ import { PrismaQuestionsRepository } from './prisma/repositories/prisma-question
     PrismaService,
     {
       provide: QuestionsRepository,
-      useClass: PrismaQuestionsRepository
+      useClass: PrismaQuestionsRepository,
     },
     PrismaQuestionsRepository,
     PrismaAnswerAttachmentsRepository,
@@ -32,4 +32,4 @@ import { PrismaQuestionsRepository } from './prisma/repositories/prisma-question
     QuestionsRepository,
   ],
 })
-export class DatabaseModule { }
+export class DatabaseModule {}
