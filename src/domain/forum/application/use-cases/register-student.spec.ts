@@ -24,7 +24,7 @@ describe('Register Student', () => {
 
     expect(result.isRight()).toBe(true)
     expect(result.value).toEqual({
-      student: inMemoryStudentsRepository.items[0]
+      student: inMemoryStudentsRepository.items[0],
     })
   })
 
