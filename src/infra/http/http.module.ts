@@ -6,6 +6,7 @@ import { PrismaService } from '../database/prisma/prisma.service'
 import {
   NestCreateQuestionUseCase,
   NestFetchQuestionsUseCase,
+  NestAuthenticateStudentUseCase,
 } from '../factories'
 import { AuthenticateController } from './controllers/authenticate.controller'
 import { CreateAccountController } from './controllers/create-account.controller'
@@ -24,7 +25,8 @@ import { FetchRecentQuestionsController } from './controllers/fetch-recent-quest
     PrismaService,
     NestCreateQuestionUseCase,
     NestFetchQuestionsUseCase,
-    AuthenticateStudentUseCase
+    NestAuthenticateStudentUseCase,
+    AuthenticateStudentUseCase,
   ],
 })
-export class HttpModule { }
+export class HttpModule {}
