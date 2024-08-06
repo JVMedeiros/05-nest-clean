@@ -1,4 +1,6 @@
+import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student'
 import { Module } from '@nestjs/common'
+import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/database.module'
 import { PrismaService } from '../database/prisma/prisma.service'
 import {
@@ -11,7 +13,7 @@ import { CreateQuestionController } from './controllers/create-question.controll
 import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller'
 
 @Module({
-  imports: [DatabaseModule],
+  imports: [DatabaseModule, CryptographyModule],
   controllers: [
     CreateAccountController,
     AuthenticateController,
@@ -22,6 +24,7 @@ import { FetchRecentQuestionsController } from './controllers/fetch-recent-quest
     PrismaService,
     NestCreateQuestionUseCase,
     NestFetchQuestionsUseCase,
+    AuthenticateStudentUseCase
   ],
 })
-export class HttpModule {}
+export class HttpModule { }
