@@ -5,9 +5,9 @@ import { StudentsRepository } from '../repositories/students-repository'
 import { StudentAlreadyExistsError } from './errors/student-already-exists-error'
 
 interface RegisterStudentUseCaseRequest {
-  name: string;
-  email: string;
-  password: string;
+  name: string
+  email: string
+  password: string
 }
 
 type RegisterStudentUseCaseResponse = Either<
@@ -20,14 +20,16 @@ type RegisterStudentUseCaseResponse = Either<
 export class RegisterStudentUseCase {
   constructor(
     private studentsRepository: StudentsRepository,
-    private hashGenerator: HashGenerator
-  ) { }
+    private hashGenerator: HashGenerator,
+  ) {}
+
   async execute({
     name,
     email,
     password,
   }: RegisterStudentUseCaseRequest): Promise<RegisterStudentUseCaseResponse> {
-    const studentWithSameEmail = await this.studentsRepository.findByEmail(email)
+    const studentWithSameEmail =
+      await this.studentsRepository.findByEmail(email)
 
     if (studentWithSameEmail) {
       return left(new StudentAlreadyExistsError(email))
@@ -38,7 +40,7 @@ export class RegisterStudentUseCase {
     const student = Student.create({
       name,
       email,
-      password: hashedPassword
+      password: hashedPassword,
     })
 
     await this.studentsRepository.create(student)
