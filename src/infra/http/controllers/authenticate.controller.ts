@@ -1,12 +1,7 @@
-import {
-  Body,
-  Controller,
-  HttpCode,
-  Post, UsePipes
-} from '@nestjs/common'
+import { Body, Controller, HttpCode, Post, UsePipes } from '@nestjs/common'
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 import { z } from 'zod'
-import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student'
+import { NestAuthenticateStudentUseCase } from '@/infra/factories'
 
 const authenticateBodySchema = z.object({
   email: z.string().email(),
@@ -17,7 +12,7 @@ type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
 
 @Controller('/sessions')
 export class AuthenticateController {
-  constructor(private authenticateStudent: AuthenticateStudentUseCase) { }
+  constructor(private authenticateStudent: NestAuthenticateStudentUseCase) {}
 
   @Post()
   @HttpCode(201)
