@@ -46,7 +46,7 @@ describe('Authenticate Student', () => {
   })
 
   it('Should not be able to authenticate a student with wrong email', async () => {
-    const student = makeStudent({
+    makeStudent({
       email: 'johndoe@example.com',
       password: await fakeHasher.hash('123456'),
     })
@@ -61,7 +61,7 @@ describe('Authenticate Student', () => {
   })
 
   it('Should not be able to authenticate a student with wrong password', async () => {
-    const student = makeStudent({
+    makeStudent({
       email: 'johndoe@example.com',
       password: await fakeHasher.hash('123456'),
     })
