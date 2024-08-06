@@ -7,6 +7,7 @@ import {
   NestCreateQuestionUseCase,
   NestFetchQuestionsUseCase,
   NestAuthenticateStudentUseCase,
+  NestRegisterStudentUseCase,
 } from '../factories'
 import { AuthenticateController } from './controllers/authenticate.controller'
 import { CreateAccountController } from './controllers/create-account.controller'
@@ -26,7 +27,8 @@ import { FetchRecentQuestionsController } from './controllers/fetch-recent-quest
     NestCreateQuestionUseCase,
     NestFetchQuestionsUseCase,
     NestAuthenticateStudentUseCase,
+    NestRegisterStudentUseCase,
     AuthenticateStudentUseCase,
   ],
 })
-export class HttpModule {}
+export class HttpModule { }
