@@ -1,6 +1,5 @@
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Student } from '@/domain/forum/enterprise/entities/student'
-import { Slug } from '@/domain/forum/enterprise/entities/value-objects/slug'
 import { Prisma, User as PrismaUser } from '@prisma/client'
 
 export class PrismaStudentMapper {
@@ -15,9 +14,7 @@ export class PrismaStudentMapper {
     )
   }
 
-  static toPersistance(
-    student: Student,
-  ): Prisma.UserUncheckedCreateInput {
+  static toPersistance(student: Student): Prisma.UserUncheckedCreateInput {
     return {
       id: student.id.toString(),
       name: student.name,
