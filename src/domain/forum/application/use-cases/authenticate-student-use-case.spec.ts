@@ -1,15 +1,17 @@
 import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
 import { FakeHasher } from 'test/cryptography/fake-hasher'
 import { FakeEncrypter } from 'test/cryptography/fake-encrypter'
-import { AuthenticateStudentUseCase } from './authenticate-student'
 import { makeStudent } from 'test/factories/make-student'
 import { WrongCredentialsError } from './errors/wrong-credentials-error'
+import { NestAuthenticateStudentUseCase } from '@/infra/factories'
+import { makeRandomString } from 'test/factories/make-random-string'
+import { makeRandomEmail } from 'test/factories/make-random-email'
 
 let inMemoryStudentsRepository: InMemoryStudentsRepository
 let fakeHasher: FakeHasher
 let encrypter: FakeEncrypter
 
-let sut: AuthenticateStudentUseCase
+let sut: NestAuthenticateStudentUseCase
 
 describe('Authenticate Student', () => {
   beforeEach(() => {
@@ -17,7 +19,7 @@ describe('Authenticate Student', () => {
     fakeHasher = new FakeHasher()
     encrypter = new FakeEncrypter()
 
-    sut = new AuthenticateStudentUseCase(
+    sut = new NestAuthenticateStudentUseCase(
       inMemoryStudentsRepository,
       fakeHasher,
       encrypter,
@@ -25,16 +27,20 @@ describe('Authenticate Student', () => {
   })
 
   it('should be able to authenticate a student', async () => {
+    const fakeStudentPayload = {
+      email: makeRandomEmail(),
+      password: makeRandomString()
+    }
     const student = makeStudent({
-      email: 'johndoe@example.com',
-      password: await fakeHasher.hash('123456'),
+      email: fakeStudentPayload.email,
+      password: await fakeHasher.hash(fakeStudentPayload.password),
     })
 
     inMemoryStudentsRepository.items.push(student)
 
     const result = await sut.execute({
-      email: 'johndoe@example.com',
-      password: '123456',
+      email: fakeStudentPayload.email,
+      password: fakeStudentPayload.password,
     })
 
     console.log(result)
@@ -46,14 +52,19 @@ describe('Authenticate Student', () => {
   })
 
   it('Should not be able to authenticate a student with wrong email', async () => {
+    const fakeStudentPayload = {
+      email: makeRandomEmail(),
+      password: makeRandomString()
+    }
+
     makeStudent({
-      email: 'johndoe@example.com',
-      password: await fakeHasher.hash('123456'),
+      email: fakeStudentPayload.email,
+      password: await fakeHasher.hash(fakeStudentPayload.password),
     })
 
     const result = await sut.execute({
-      email: 'johndoe1@example.com',
-      password: '123456',
+      email: makeRandomEmail(),
+      password: fakeStudentPayload.password,
     })
 
     expect(result.isLeft()).toBe(true)
@@ -61,14 +72,19 @@ describe('Authenticate Student', () => {
   })
 
   it('Should not be able to authenticate a student with wrong password', async () => {
+    const fakeStudentPayload = {
+      email: makeRandomEmail(),
+      password: makeRandomString()
+    }
+
     makeStudent({
-      email: 'johndoe@example.com',
-      password: await fakeHasher.hash('123456'),
+      email: fakeStudentPayload.email,
+      password: await fakeHasher.hash(fakeStudentPayload.password),
     })
 
     const result = await sut.execute({
-      email: 'johndoe@example.com',
-      password: '1234567',
+      email: fakeStudentPayload.email,
+      password: makeRandomString(),
     })
 
     expect(result.isLeft()).toBe(true)
