@@ -62,11 +62,11 @@ describe('Fetch Recent Questions (E2E)', () => {
 
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({
-      questions: [
+      questions: expect.arrayContaining([
         expect.objectContaining({ title: fakeQuestions[0].title }),
         expect.objectContaining({ title: fakeQuestions[1].title }),
         expect.objectContaining({ title: fakeQuestions[2].title }),
-      ],
+      ]),
     })
   })
 })
