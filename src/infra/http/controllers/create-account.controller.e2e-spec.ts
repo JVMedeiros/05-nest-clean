@@ -3,6 +3,8 @@ import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
 import request from 'supertest'
+import { makeRandomEmail } from 'test/factories/make-random-email'
+import { makeRandomString } from 'test/factories/make-random-string'
 
 describe('Create Account (E2E)', () => {
   let app: INestApplication
@@ -21,17 +23,22 @@ describe('Create Account (E2E)', () => {
   })
 
   test('[POST] /accounts', async () => {
+    const fakePayload = {
+      name: makeRandomString(),
+      email: makeRandomEmail(),
+      password: makeRandomString(),
+    }
     const response = await request(app.getHttpServer()).post('/accounts').send({
-      name: 'John Doe',
-      email: 'johndoe@example.com',
-      password: '123456',
+      name: fakePayload.name,
+      email: fakePayload.email,
+      password: fakePayload.password,
     })
 
     expect(response.statusCode).toBe(201)
 
     const userOnDatabase = await prisma.user.findUnique({
       where: {
-        email: 'johndoe@example.com',
+        email: fakePayload.email,
       },
     })
 
