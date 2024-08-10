@@ -1,4 +1,3 @@
-import { AuthenticateStudentUseCase } from '@/domain/forum/application/use-cases/authenticate-student'
 import { Module } from '@nestjs/common'
 import { CryptographyModule } from '../cryptography/cryptography.module'
 import { DatabaseModule } from '../database/database.module'
@@ -9,10 +8,12 @@ import {
   NestAuthenticateStudentUseCase,
   NestRegisterStudentUseCase,
   NestGetQuestionBySlugUseCase,
+  NestEditQuestionUseCase,
 } from '../factories'
 import { AuthenticateController } from './controllers/authenticate.controller'
 import { CreateAccountController } from './controllers/create-account.controller'
 import { CreateQuestionController } from './controllers/create-question.controller'
+import { EditQuestionController } from './controllers/edit-question.controller'
 import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller'
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller'
 
@@ -24,6 +25,7 @@ import { GetQuestionBySlugController } from './controllers/get-question-by-slug.
     CreateQuestionController,
     FetchRecentQuestionsController,
     GetQuestionBySlugController,
+    EditQuestionController,
   ],
   providers: [
     PrismaService,
@@ -32,7 +34,7 @@ import { GetQuestionBySlugController } from './controllers/get-question-by-slug.
     NestAuthenticateStudentUseCase,
     NestRegisterStudentUseCase,
     NestGetQuestionBySlugUseCase,
-    AuthenticateStudentUseCase,
+    NestEditQuestionUseCase,
   ],
 })
 export class HttpModule { }
