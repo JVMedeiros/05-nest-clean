@@ -5,6 +5,7 @@ import { Test } from '@nestjs/testing'
 import request from 'supertest'
 import { hash } from 'bcryptjs'
 import { JwtService } from '@nestjs/jwt'
+import { makeRandomString } from 'test/factories/make-random-string'
 
 describe('Fetch Recent Questions (E2E)', () => {
   let app: INestApplication
@@ -27,8 +28,8 @@ describe('Fetch Recent Questions (E2E)', () => {
   test('[GET] /questions', async () => {
     const user = await prisma.user.create({
       data: {
-        name: 'John Doe',
-        email: 'johndoe@example.com',
+        name: makeRandomString(),
+        email: makeRandomString(),
         password: await hash('123456', 8),
       },
     })
@@ -38,26 +39,27 @@ describe('Fetch Recent Questions (E2E)', () => {
     await prisma.question.createMany({
       data: [
         {
-          title: 'Question 01',
-          slug: 'question-01',
-          content: 'Question content',
+          title: makeRandomString(),
+          slug: makeRandomString(),
+          content: makeRandomString(),
           authorId: user.id,
         },
         {
-          title: 'Question 02',
-          slug: 'question-02',
-          content: 'Question content',
+          title: makeRandomString(),
+          slug: makeRandomString(),
+          content: makeRandomString(),
           authorId: user.id,
         },
         {
-          title: 'Question 03',
-          slug: 'question-03',
-          content: 'Question content',
+          title: makeRandomString(),
+          slug: makeRandomString(),
+          content: makeRandomString(),
           authorId: user.id,
         },
       ],
     })
 
+    const fakeQuestions = await prisma.question.findMany()
     const response = await request(app.getHttpServer())
       .get('/questions')
       .set('Authorization', `Bearer ${accessToken}`)
@@ -66,9 +68,9 @@ describe('Fetch Recent Questions (E2E)', () => {
     expect(response.statusCode).toBe(200)
     expect(response.body).toEqual({
       questions: [
-        expect.objectContaining({ title: 'Question 01' }),
-        expect.objectContaining({ title: 'Question 02' }),
-        expect.objectContaining({ title: 'Question 03' }),
+        expect.objectContaining({ title: fakeQuestions[0].title }),
+        expect.objectContaining({ title: fakeQuestions[1].title }),
+        expect.objectContaining({ title: fakeQuestions[2].title }),
       ],
     })
   })
