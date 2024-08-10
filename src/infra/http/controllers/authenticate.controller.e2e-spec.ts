@@ -4,6 +4,8 @@ import { INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
 import request from 'supertest'
 import { hash } from 'bcryptjs'
+import { makeRandomString } from 'test/factories/make-random-string'
+import { makeRandomEmail } from 'test/factories/make-random-email'
 
 describe('Authenticate (E2E)', () => {
   let app: INestApplication
@@ -22,16 +24,22 @@ describe('Authenticate (E2E)', () => {
   })
 
   test('[POST] /sessions', async () => {
+    const fakePayload = {
+      name: makeRandomString(),
+      email: makeRandomEmail(),
+      password: makeRandomString()
+    }
+
     await prisma.user.create({
       data: {
-        name: 'John Doe',
-        email: 'johndoe@example.com',
-        password: await hash('123456', 8),
+        name: fakePayload.name,
+        email: fakePayload.email,
+        password: await hash(fakePayload.password, 8),
       },
     })
     const response = await request(app.getHttpServer()).post('/sessions').send({
-      email: 'johndoe@example.com',
-      password: '123456',
+      email: fakePayload.email,
+      password: fakePayload.password,
     })
 
     expect(response.statusCode).toBe(201)
