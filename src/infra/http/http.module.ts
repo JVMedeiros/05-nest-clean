@@ -14,9 +14,11 @@ import {
   NestEditAnswerUseCase,
   NestDeleteAnswerUseCase,
   NestFetchQuestionAnswersUseCase,
+  NestChooseQuestionBestAnswerUseCase,
 } from '../factories'
 import { AnswerQuestionController } from './controllers/answer-question.controller'
 import { AuthenticateController } from './controllers/authenticate.controller'
+import { ChooseQuestionBestAnswerController } from './controllers/choose-question-best-answer.controller'
 import { CreateAccountController } from './controllers/create-account.controller'
 import { CreateQuestionController } from './controllers/create-question.controller'
 import { DeleteAnswerController } from './controllers/delete-answer.controller'
@@ -40,7 +42,8 @@ import { GetQuestionBySlugController } from './controllers/get-question-by-slug.
     AnswerQuestionController,
     EditAnswerController,
     DeleteAnswerController,
-    FetchQuestionAnswerController
+    FetchQuestionAnswerController,
+    ChooseQuestionBestAnswerController,
   ],
   providers: [
     PrismaService,
@@ -54,7 +57,8 @@ import { GetQuestionBySlugController } from './controllers/get-question-by-slug.
     NestAnswerQuestionUseCase,
     NestEditAnswerUseCase,
     NestDeleteAnswerUseCase,
-    NestFetchQuestionAnswersUseCase
+    NestFetchQuestionAnswersUseCase,
+    NestChooseQuestionBestAnswerUseCase
   ],
 })
 export class HttpModule { }
