@@ -12,7 +12,7 @@ import { QuestionFactory } from 'test/factories/make-question'
 import { AnswerFactory } from 'test/factories/make-answer'
 import { QuestionCommentFactory } from 'test/factories/make-question-comment'
 
-describe('Delete answers (E2E)', () => {
+describe('Delete question comment (E2E)', () => {
   let app: INestApplication
   let studentFactory: StudentFactory
   let questionFactory: QuestionFactory
