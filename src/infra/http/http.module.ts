@@ -18,6 +18,7 @@ import {
   NestCommentOnQuestionUseCase,
   NestDeleteQuestionCommentUseCase,
   NestCommentOnAnswerUseCase,
+  NestDeleteAnswerCommentUseCase,
 } from '../factories'
 import { AnswerQuestionController } from './controllers/answer-question.controller'
 import { AuthenticateController } from './controllers/authenticate.controller'
@@ -26,6 +27,7 @@ import { CommentOnAnswerController } from './controllers/comment-on-answer.contr
 import { CommentOnQuestionController } from './controllers/comment-on-question.controller'
 import { CreateAccountController } from './controllers/create-account.controller'
 import { CreateQuestionController } from './controllers/create-question.controller'
+import { DeleteAnswerCommentController } from './controllers/delete-answer-comment.controller'
 import { DeleteAnswerController } from './controllers/delete-answer.controller'
 import { DeleteQuestionCommentController } from './controllers/delete-question-comment.controller'
 import { DeleteQuestionController } from './controllers/delete-question.controller'
@@ -53,6 +55,7 @@ import { GetQuestionBySlugController } from './controllers/get-question-by-slug.
     CommentOnQuestionController,
     DeleteQuestionCommentController,
     CommentOnAnswerController,
+    DeleteAnswerCommentController
   ],
   providers: [
     PrismaService,
@@ -70,7 +73,8 @@ import { GetQuestionBySlugController } from './controllers/get-question-by-slug.
     NestChooseQuestionBestAnswerUseCase,
     NestCommentOnQuestionUseCase,
     NestDeleteQuestionCommentUseCase,
-    NestCommentOnAnswerUseCase
+    NestCommentOnAnswerUseCase,
+    NestDeleteAnswerCommentUseCase
   ],
 })
 export class HttpModule { }
