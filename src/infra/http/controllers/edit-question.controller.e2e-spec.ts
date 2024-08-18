@@ -105,7 +105,7 @@ describe('Edit Question (E2E)', () => {
         expect.objectContaining({
           id: fakeAttachment3.id.toString()
         }),
-      ]))
-
+      ])
+    )
   })
 })
