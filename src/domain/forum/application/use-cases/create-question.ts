@@ -2,7 +2,7 @@ import { Either, right } from '@/core/either'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Question } from '../../enterprise/entities/question'
 import { QuestionAttachmentList } from '../../enterprise/entities/question-attachment-list'
-import { QuestionAttachment } from '../../enterprise/entities/question-attatchment'
+import { QuestionAttachment } from '../../enterprise/entities/question-attachment'
 import { QuestionsRepository } from '../repositories/questions-respository'
 
 interface CreateQuestionUseCaseRequest {
@@ -20,7 +20,7 @@ type CreateQuestionUseCaseResponse = Either<
 >
 
 export class CreateQuestionUseCase {
-  constructor(private questionsRepository: QuestionsRepository) {}
+  constructor(private questionsRepository: QuestionsRepository) { }
   async execute({
     authorId,
     title,
