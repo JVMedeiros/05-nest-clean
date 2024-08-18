@@ -9,18 +9,20 @@ import { makeRandomString } from 'test/factories/make-random-string'
 import { StudentFactory } from 'test/factories/make-student'
 import { DatabaseModule } from '@/infra/database/database.module'
 import { QuestionFactory } from 'test/factories/make-question'
+import { AttachmentFactory } from 'test/factories/make-attachment'
 
 describe('Answer Question (E2E)', () => {
   let app: INestApplication
   let studentFactory: StudentFactory
   let questionFactory: QuestionFactory
+  let attachmentFactory: AttachmentFactory
   let prisma: PrismaService
   let jwt: JwtService
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory, QuestionFactory]
+      providers: [StudentFactory, QuestionFactory, AttachmentFactory]
     }).compile()
 
     app = moduleRef.createNestApplication()
@@ -28,6 +30,7 @@ describe('Answer Question (E2E)', () => {
     prisma = moduleRef.get(PrismaService)
     studentFactory = moduleRef.get(StudentFactory)
     questionFactory = moduleRef.get(QuestionFactory)
+    attachmentFactory = moduleRef.get(AttachmentFactory)
 
     jwt = moduleRef.get(JwtService)
 
@@ -40,8 +43,8 @@ describe('Answer Question (E2E)', () => {
       email: makeRandomString(),
       password: await hash(makeRandomString(), 8),
     })
-
     const accessToken = jwt.sign({ sub: user.id.toString() })
+
     const fakeQuestion = await questionFactory.makePrismaQuestion({
       authorId: user.id
     })
@@ -50,21 +53,36 @@ describe('Answer Question (E2E)', () => {
       content: makeRandomString(),
     }
 
+    const fakeAttachment1 = await attachmentFactory.makePrismaAttachment()
+    const fakeAttachment2 = await attachmentFactory.makePrismaAttachment()
+
     const response = await request(app.getHttpServer())
       .post(`/questions/${questionId}/answers`)
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
         content: fakePayload.content,
+        attachments: [
+          fakeAttachment1.id.toString(),
+          fakeAttachment2.id.toString()
+        ]
       })
 
-    expect(response.statusCode).toBe(201)
 
-    const questionOnDatabase = await prisma.answer.findFirst({
+    const answerOnDatabase = await prisma.answer.findFirst({
       where: {
         content: fakePayload.content,
       },
     })
 
-    expect(questionOnDatabase).toBeTruthy()
+    const attachmentsOnDatabase = await prisma.attachment.findMany({
+      where: {
+        answerId: answerOnDatabase?.id
+      }
+    })
+
+    expect(response.statusCode).toBe(201)
+    expect(answerOnDatabase).toBeTruthy()
+    expect(attachmentsOnDatabase).toHaveLength(2)
+
   })
 })
