@@ -3,7 +3,7 @@ import { ResourceNotFoundError } from '@/core/errors/errors/resource-not-found'
 import { DomainEvents } from '@/core/events/domain-events'
 import { EventHandler } from '@/core/events/event-handler'
 import { AnswerCreatedEvent } from '@/domain/forum/enterprise/events/answer-created-event'
-import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-respository'
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { SendNotificationUseCase } from '../use-cases/send-notification'
 
 export class OnAnswerCreated implements EventHandler {
