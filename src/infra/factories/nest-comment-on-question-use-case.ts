@@ -1,5 +1,5 @@
 import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
-import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-respository'
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { CommentOnQuestionUseCase } from '@/domain/forum/application/use-cases/comment-on-question'
 import { Injectable } from '@nestjs/common'
 
