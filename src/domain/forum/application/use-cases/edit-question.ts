@@ -4,7 +4,7 @@ import { Question } from '../../enterprise/entities/question'
 import { QuestionAttachmentList } from '../../enterprise/entities/question-attachment-list'
 import { QuestionAttachment } from '../../enterprise/entities/question-attachment'
 import { QuestionAttachmentsRepository } from '../repositories/question-attachments-repository'
-import { QuestionsRepository } from '../repositories/questions-respository'
+import { QuestionsRepository } from '../repositories/questions-repository'
 import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
 import { ResourceNotFoundError } from '@/core/errors/errors/resource-not-found'
 
