@@ -61,7 +61,6 @@ describe('Create Question (E2E)', () => {
         ]
       })
 
-    expect(response.statusCode).toBe(201)
 
     const questionOnDatabase = await prisma.question.findFirst({
       where: {
@@ -75,6 +74,7 @@ describe('Create Question (E2E)', () => {
       }
     })
 
+    expect(response.statusCode).toBe(201)
     expect(questionOnDatabase).toBeTruthy()
     expect(attachmentsOnDatabase).toHaveLength(2)
 
