@@ -4,7 +4,7 @@ import { AnswersRepository } from '@/domain/forum/application/repositories/answe
 import { AttachmentsRepository } from '@/domain/forum/application/repositories/attachments-repository'
 import { QuestionAttachmentsRepository } from '@/domain/forum/application/repositories/question-attachments-repository'
 import { QuestionCommentsRepository } from '@/domain/forum/application/repositories/question-comments-repository'
-import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-respository'
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { StudentsRepository } from '@/domain/forum/application/repositories/students-repository'
 import { Module } from '@nestjs/common'
 import { PrismaService } from './prisma/prisma.service'
