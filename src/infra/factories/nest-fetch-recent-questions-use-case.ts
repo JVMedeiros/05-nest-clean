@@ -1,4 +1,4 @@
-import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-respository'
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { FetchRecentQuestionsUseCase } from '@/domain/forum/application/use-cases/fetch-recent-questions'
 import { Injectable } from '@nestjs/common'
 
