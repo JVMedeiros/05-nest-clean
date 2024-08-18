@@ -2,7 +2,7 @@ import { Either, left, right } from '@/core/either'
 import { UniqueEntityID } from '@/core/entities/unique-entity-id'
 import { Question } from '../../enterprise/entities/question'
 import { QuestionAttachmentList } from '../../enterprise/entities/question-attachment-list'
-import { QuestionAttachment } from '../../enterprise/entities/question-attatchment'
+import { QuestionAttachment } from '../../enterprise/entities/question-attachment'
 import { QuestionAttachmentsRepository } from '../repositories/question-attachments-repository'
 import { QuestionsRepository } from '../repositories/questions-respository'
 import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
@@ -27,7 +27,7 @@ export class EditQuestionUseCase {
   constructor(
     private questionsRepository: QuestionsRepository,
     private questionAttachmentsRepository: QuestionAttachmentsRepository,
-  ) {}
+  ) { }
 
   async execute({
     authorId,
