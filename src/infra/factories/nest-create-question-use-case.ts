@@ -1,4 +1,4 @@
-import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-respository'
+import { QuestionsRepository } from '@/domain/forum/application/repositories/questions-repository'
 import { CreateQuestionUseCase } from '@/domain/forum/application/use-cases/create-question'
 import { Injectable } from '@nestjs/common'
 
