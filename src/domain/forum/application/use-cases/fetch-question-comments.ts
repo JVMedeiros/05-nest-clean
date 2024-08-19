@@ -1,6 +1,6 @@
 import { Either, right } from '@/core/either'
 import { QuestionComment } from '../../enterprise/entities/question-comment'
-import { CommentWithAuthor } from '../../enterprise/entities/value-objects/comment-with-autor'
+import { CommentWithAuthor } from '../../enterprise/entities/value-objects/comment-with-author'
 import { QuestionCommentsRepository } from '../repositories/question-comments-repository'
 
 interface FetchQuestionCommentsUseCaseRequest {
