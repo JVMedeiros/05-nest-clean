@@ -8,7 +8,6 @@ import request from 'supertest'
 import { AnswerFactory } from 'test/factories/make-answer'
 import { AnswerCommentFactory } from 'test/factories/make-answer-comment'
 import { QuestionFactory } from 'test/factories/make-question'
-import { QuestionCommentFactory } from 'test/factories/make-question-comment'
 import { makeRandomString } from 'test/factories/make-random-string'
 import { StudentFactory } from 'test/factories/make-student'
 
@@ -21,11 +20,15 @@ describe('Fetch question comments (E2E)', () => {
   let jwt: JwtService
   let prisma: PrismaService
 
-
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory, QuestionFactory, AnswerFactory, AnswerCommentFactory],
+      providers: [
+        StudentFactory,
+        QuestionFactory,
+        AnswerFactory,
+        AnswerCommentFactory,
+      ],
     }).compile()
 
     app = moduleRef.createNestApplication()
