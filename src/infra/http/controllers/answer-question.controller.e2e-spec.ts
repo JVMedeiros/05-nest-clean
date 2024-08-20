@@ -22,7 +22,7 @@ describe('Answer Question (E2E)', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory, QuestionFactory, AttachmentFactory]
+      providers: [StudentFactory, QuestionFactory, AttachmentFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
@@ -46,7 +46,7 @@ describe('Answer Question (E2E)', () => {
     const accessToken = jwt.sign({ sub: user.id.toString() })
 
     const fakeQuestion = await questionFactory.makePrismaQuestion({
-      authorId: user.id
+      authorId: user.id,
     })
     const questionId = fakeQuestion.id.toString()
     const fakePayload = {
@@ -63,10 +63,9 @@ describe('Answer Question (E2E)', () => {
         content: fakePayload.content,
         attachments: [
           fakeAttachment1.id.toString(),
-          fakeAttachment2.id.toString()
-        ]
+          fakeAttachment2.id.toString(),
+        ],
       })
-
 
     const answerOnDatabase = await prisma.answer.findFirst({
       where: {
@@ -76,13 +75,12 @@ describe('Answer Question (E2E)', () => {
 
     const attachmentsOnDatabase = await prisma.attachment.findMany({
       where: {
-        answerId: answerOnDatabase?.id
-      }
+        answerId: answerOnDatabase?.id,
+      },
     })
 
     expect(response.statusCode).toBe(201)
     expect(answerOnDatabase).toBeTruthy()
     expect(attachmentsOnDatabase).toHaveLength(2)
-
   })
 })
