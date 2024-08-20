@@ -20,7 +20,7 @@ describe('Comment on Question (E2E)', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory, QuestionFactory]
+      providers: [StudentFactory, QuestionFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
@@ -43,7 +43,7 @@ describe('Comment on Question (E2E)', () => {
 
     const accessToken = jwt.sign({ sub: user.id.toString() })
     const fakeQuestion = await questionFactory.makePrismaQuestion({
-      authorId: user.id
+      authorId: user.id,
     })
     const questionId = fakeQuestion.id.toString()
     const fakePayload = {
