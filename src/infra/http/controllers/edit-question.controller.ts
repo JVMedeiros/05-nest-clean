@@ -1,4 +1,11 @@
-import { BadRequestException, Body, Controller, HttpCode, Param, Put } from '@nestjs/common'
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  HttpCode,
+  Param,
+  Put,
+} from '@nestjs/common'
 import { CurrentUser } from '../../auth/current-user-decorator'
 import { UserPayload } from '../../auth/jwt.strategy'
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
@@ -8,7 +15,7 @@ import { z } from 'zod'
 const editQuestionBodySchema = z.object({
   title: z.string(),
   content: z.string(),
-  attachments: z.array(z.string().uuid())
+  attachments: z.array(z.string().uuid()),
 })
 
 const bodyValidationPipe = new ZodValidationPipe(editQuestionBodySchema)
@@ -16,7 +23,7 @@ type EditQuestionBodySchema = z.infer<typeof editQuestionBodySchema>
 
 @Controller('/questions/:id')
 export class EditQuestionController {
-  constructor(private editQuestion: NestEditQuestionUseCase) { }
+  constructor(private editQuestion: NestEditQuestionUseCase) {}
 
   @Put()
   @HttpCode(204)
@@ -33,7 +40,7 @@ export class EditQuestionController {
       content,
       authorId: userId,
       attachmentsIds: attachments,
-      questionId
+      questionId,
     })
 
     if (result.isLeft()) {
