@@ -26,7 +26,13 @@ describe('Edit answer (E2E)', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory, QuestionFactory, AnswerFactory, AttachmentFactory, AnswerAttachmentFactory]
+      providers: [
+        StudentFactory,
+        QuestionFactory,
+        AnswerFactory,
+        AttachmentFactory,
+        AnswerAttachmentFactory,
+      ],
     }).compile()
 
     app = moduleRef.createNestApplication()
@@ -52,11 +58,11 @@ describe('Edit answer (E2E)', () => {
 
     const accessToken = jwt.sign({ sub: user.id.toString() })
     const fakeQuestion = await questionFactory.makePrismaQuestion({
-      authorId: user.id
+      authorId: user.id,
     })
     const fakeAnswer = await answerFactory.makePrismaAnswer({
       questionId: fakeQuestion.id,
-      authorId: user.id
+      authorId: user.id,
     })
 
     const answerId = fakeAnswer.id.toString()
@@ -68,15 +74,14 @@ describe('Edit answer (E2E)', () => {
 
     await answerAttachmentFactory.makePrismaAnswerAttachment({
       attachmentId: fakeAttachment1.id,
-      answerId: fakeAnswer.id
+      answerId: fakeAnswer.id,
     })
     await answerAttachmentFactory.makePrismaAnswerAttachment({
       attachmentId: fakeAttachment2.id,
-      answerId: fakeAnswer.id
+      answerId: fakeAnswer.id,
     })
 
     const fakeAttachment3 = await attachmentFactory.makePrismaAttachment()
-
 
     const response = await request(app.getHttpServer())
       .put(`/answers/${answerId}`)
@@ -85,8 +90,8 @@ describe('Edit answer (E2E)', () => {
         content: fakePayload.content,
         attachments: [
           fakeAttachment1.id.toString(),
-          fakeAttachment3.id.toString()
-        ]
+          fakeAttachment3.id.toString(),
+        ],
       })
 
     const answerOnDatabase = await prisma.answer.findFirst({
@@ -96,8 +101,8 @@ describe('Edit answer (E2E)', () => {
     })
     const attachmentsOnDatabase = await prisma.attachment.findMany({
       where: {
-        answerId: answerOnDatabase?.id
-      }
+        answerId: answerOnDatabase?.id,
+      },
     })
 
     expect(response.statusCode).toBe(204)
@@ -106,12 +111,12 @@ describe('Edit answer (E2E)', () => {
     expect(attachmentsOnDatabase).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          id: fakeAttachment1.id.toString()
+          id: fakeAttachment1.id.toString(),
         }),
         expect.objectContaining({
-          id: fakeAttachment3.id.toString()
+          id: fakeAttachment3.id.toString(),
         }),
-      ])
+      ]),
     )
   })
 })
