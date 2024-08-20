@@ -4,9 +4,7 @@ import { Injectable } from '@nestjs/common'
 
 @Injectable()
 export class NestDeleteAnswerCommentUseCase extends DeleteAnswerCommentUseCase {
-  constructor(
-    answerCommentsRepository: AnswerCommentsRepository,
-  ) {
+  constructor(answerCommentsRepository: AnswerCommentsRepository) {
     super(answerCommentsRepository)
   }
 }
