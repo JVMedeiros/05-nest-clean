@@ -1,4 +1,10 @@
-import { BadRequestException, Controller, Get, Param, Query } from '@nestjs/common'
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  Param,
+  Query,
+} from '@nestjs/common'
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 import { z } from 'zod'
 import { NestFetchQuestionCommentsUseCase } from '@/infra/factories'
@@ -16,16 +22,18 @@ type PageQueryParamSchema = z.infer<typeof pageQueryParamSchema>
 
 @Controller('/questions/:questionId/comments')
 export class FetchQuestionCommentsController {
-  constructor(private fetchQuestionComments: NestFetchQuestionCommentsUseCase) { }
+  constructor(
+    private fetchQuestionComments: NestFetchQuestionCommentsUseCase,
+  ) {}
 
   @Get()
   async handle(
     @Query('page', queryValidationPipe) page: PageQueryParamSchema,
-    @Param('questionId') questionId: string
+    @Param('questionId') questionId: string,
   ) {
     const result = await this.fetchQuestionComments.execute({
       page,
-      questionId
+      questionId,
     })
 
     if (result.isLeft()) {
