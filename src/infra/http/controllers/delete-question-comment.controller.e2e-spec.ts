@@ -9,7 +9,6 @@ import { makeRandomString } from 'test/factories/make-random-string'
 import { StudentFactory } from 'test/factories/make-student'
 import { DatabaseModule } from '@/infra/database/database.module'
 import { QuestionFactory } from 'test/factories/make-question'
-import { AnswerFactory } from 'test/factories/make-answer'
 import { QuestionCommentFactory } from 'test/factories/make-question-comment'
 
 describe('Delete question comment (E2E)', () => {
@@ -23,7 +22,7 @@ describe('Delete question comment (E2E)', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory, QuestionFactory, QuestionCommentFactory]
+      providers: [StudentFactory, QuestionFactory, QuestionCommentFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
@@ -46,12 +45,13 @@ describe('Delete question comment (E2E)', () => {
 
     const accessToken = jwt.sign({ sub: user.id.toString() })
     const fakeQuestion = await questionFactory.makePrismaQuestion({
-      authorId: user.id
+      authorId: user.id,
     })
-    const fakeQuestionComment = await questionCommentFactory.makePrismaQuestionComment({
-      questionId: fakeQuestion.id,
-      authorId: user.id
-    })
+    const fakeQuestionComment =
+      await questionCommentFactory.makePrismaQuestionComment({
+        questionId: fakeQuestion.id,
+        authorId: user.id,
+      })
     const questionCommentId = fakeQuestionComment.id.toString()
 
     const response = await request(app.getHttpServer())
@@ -62,7 +62,7 @@ describe('Delete question comment (E2E)', () => {
 
     const commentOnDatabase = await prisma.comment.findUnique({
       where: {
-        id: questionCommentId
+        id: questionCommentId,
       },
     })
 
