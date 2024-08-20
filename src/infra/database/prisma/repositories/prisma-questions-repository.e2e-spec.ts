@@ -67,4 +67,45 @@ describe('Prisma Questions Repository (E2E)', () => {
 
     expect(cached).toEqual(JSON.stringify(questionDetails))
   })
+
+  it('Should return cached question details on subsequent calls', async () => {
+    const fakeUser = await studentFactory.makePrismaStudent()
+    const fakeQuestion = await questionFactory.makePrismaQuestion({
+      authorId: fakeUser.id,
+    })
+    const fakeAttachment = await attachmentFactory.makePrismaAttachment()
+
+    await questionAttachmentFactory.makePrismaQuestionAttachment({
+      attachmentId: fakeAttachment.id,
+      questionId: fakeQuestion.id,
+    })
+
+    const slug = fakeQuestion.slug.value
+    await cacheRepository.set(`question:${slug}:details`, JSON.stringify({ empty: true }))
+
+    const questionDetails = await questionsRepository.findDetailsBySlug(slug)
+
+    expect(questionDetails).toEqual({ empty: true })
+  })
+
+  it('Should reset question details cache when saving the question', async () => {
+    const fakeUser = await studentFactory.makePrismaStudent()
+    const fakeQuestion = await questionFactory.makePrismaQuestion({
+      authorId: fakeUser.id,
+    })
+    const fakeAttachment = await attachmentFactory.makePrismaAttachment()
+
+    await questionAttachmentFactory.makePrismaQuestionAttachment({
+      attachmentId: fakeAttachment.id,
+      questionId: fakeQuestion.id,
+    })
+
+    const slug = fakeQuestion.slug.value
+    await cacheRepository.set(`question:${slug}:details`, JSON.stringify({ empty: true }))
+
+    await questionsRepository.save(fakeQuestion)
+    const cached = await cacheRepository.get(`question:${slug}:details`)
+
+    expect(cached).toBeNull()
+  })
 })
