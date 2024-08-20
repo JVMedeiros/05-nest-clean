@@ -8,7 +8,10 @@ import { PrismaService } from '../prisma.service'
 
 @Injectable()
 export class PrismaQuestionsRepository implements QuestionsRepository {
-  constructor(private prisma: PrismaService, private questionAttachmentsRepository: QuestionAttachmentsRepository) { }
+  constructor(
+    private prisma: PrismaService,
+    private questionAttachmentsRepository: QuestionAttachmentsRepository,
+  ) {}
 
   async create(question: Question): Promise<void> {
     const data = PrismaQuestionMapper.toPersistance(question)
@@ -18,7 +21,7 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
     })
 
     await this.questionAttachmentsRepository.createMany(
-      question.attachments.getItems()
+      question.attachments.getItems(),
     )
   }
 
@@ -44,12 +47,12 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
       }),
 
       this.questionAttachmentsRepository.createMany(
-        question.attachments.getNewItems()
+        question.attachments.getNewItems(),
       ),
 
       this.questionAttachmentsRepository.deleteMany(
-        question.attachments.getRemovedItems()
-      )
+        question.attachments.getRemovedItems(),
+      ),
     ])
   }
 
