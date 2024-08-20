@@ -3,7 +3,6 @@ import { PrismaService } from '@/infra/database/prisma/prisma.service'
 import { INestApplication } from '@nestjs/common'
 import { Test } from '@nestjs/testing'
 import request from 'supertest'
-import { hash } from 'bcryptjs'
 import { JwtService } from '@nestjs/jwt'
 import { makeRandomString } from 'test/factories/make-random-string'
 import { QuestionFactory } from 'test/factories/make-question'
@@ -22,7 +21,7 @@ describe('Fetch Question Answers (E2E)', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory, QuestionFactory, AnswerFactory]
+      providers: [StudentFactory, QuestionFactory, AnswerFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
