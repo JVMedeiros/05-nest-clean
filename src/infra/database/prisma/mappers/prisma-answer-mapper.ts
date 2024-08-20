@@ -16,9 +16,7 @@ export class PrismaAnswerMapper {
     )
   }
 
-  static toPersistance(
-    answer: Answer,
-  ): Prisma.AnswerUncheckedCreateInput {
+  static toPersistance(answer: Answer): Prisma.AnswerUncheckedCreateInput {
     return {
       id: answer.id.toString(),
       authorId: answer.authorId.toString(),
