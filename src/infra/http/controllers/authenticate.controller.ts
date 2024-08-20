@@ -1,4 +1,12 @@
-import { BadRequestException, Body, Controller, HttpCode, Post, UnauthorizedException, UsePipes } from '@nestjs/common'
+import {
+  BadRequestException,
+  Body,
+  Controller,
+  HttpCode,
+  Post,
+  UnauthorizedException,
+  UsePipes,
+} from '@nestjs/common'
 import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 import { z } from 'zod'
 import { NestAuthenticateStudentUseCase } from '@/infra/factories'
@@ -15,7 +23,7 @@ type AuthenticateBodySchema = z.infer<typeof authenticateBodySchema>
 @Controller('/sessions')
 @Public()
 export class AuthenticateController {
-  constructor(private authenticateStudent: NestAuthenticateStudentUseCase) { }
+  constructor(private authenticateStudent: NestAuthenticateStudentUseCase) {}
 
   @Post()
   @HttpCode(201)
