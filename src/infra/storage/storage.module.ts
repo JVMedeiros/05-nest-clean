@@ -8,9 +8,9 @@ import { R2Storage } from './r2-storage'
   providers: [
     {
       provide: Uploader,
-      useClass: R2Storage
-    }
+      useClass: R2Storage,
+    },
   ],
   exports: [Uploader],
 })
-export class StorageModule { }
+export class StorageModule {}
