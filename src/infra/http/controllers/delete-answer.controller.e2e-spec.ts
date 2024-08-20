@@ -22,7 +22,7 @@ describe('Delete answers (E2E)', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory, QuestionFactory, AnswerFactory]
+      providers: [StudentFactory, QuestionFactory, AnswerFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
@@ -45,11 +45,11 @@ describe('Delete answers (E2E)', () => {
 
     const accessToken = jwt.sign({ sub: user.id.toString() })
     const fakeQuestion = await questionFactory.makePrismaQuestion({
-      authorId: user.id
+      authorId: user.id,
     })
     const fakeAnswer = await answerFactory.makePrismaAnswer({
       questionId: fakeQuestion.id,
-      authorId: user.id
+      authorId: user.id,
     })
     const answerId = fakeAnswer.id.toString()
 
@@ -61,7 +61,7 @@ describe('Delete answers (E2E)', () => {
 
     const answerOnDatabase = await prisma.answer.findUnique({
       where: {
-        id: answerId
+        id: answerId,
       },
     })
 
