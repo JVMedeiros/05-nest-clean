@@ -24,7 +24,12 @@ describe('Edit Question (E2E)', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory, QuestionFactory, AttachmentFactory, QuestionAttachmentFactory]
+      providers: [
+        StudentFactory,
+        QuestionFactory,
+        AttachmentFactory,
+        QuestionAttachmentFactory,
+      ],
     }).compile()
 
     app = moduleRef.createNestApplication()
@@ -51,16 +56,16 @@ describe('Edit Question (E2E)', () => {
     const fakeAttachment1 = await attachmentFactory.makePrismaAttachment()
     const fakeAttachment2 = await attachmentFactory.makePrismaAttachment()
     const fakeQuestion = await questionFactory.makePrismaQuestion({
-      authorId: user.id
+      authorId: user.id,
     })
 
     await questionAttachmentFactory.makePrismaQuestionAttachment({
       attachmentId: fakeAttachment1.id,
-      questionId: fakeQuestion.id
+      questionId: fakeQuestion.id,
     })
     await questionAttachmentFactory.makePrismaQuestionAttachment({
       attachmentId: fakeAttachment2.id,
-      questionId: fakeQuestion.id
+      questionId: fakeQuestion.id,
     })
 
     const questionId = fakeQuestion.id.toString()
@@ -78,10 +83,9 @@ describe('Edit Question (E2E)', () => {
         content: fakePayload.content,
         attachments: [
           fakeAttachment1.id.toString(),
-          fakeAttachment3.id.toString()
-        ]
+          fakeAttachment3.id.toString(),
+        ],
       })
-
 
     const questionOnDatabase = await prisma.question.findFirst({
       where: {
@@ -90,8 +94,8 @@ describe('Edit Question (E2E)', () => {
     })
     const attachmentsOnDatabase = await prisma.attachment.findMany({
       where: {
-        questionId: questionOnDatabase?.id
-      }
+        questionId: questionOnDatabase?.id,
+      },
     })
 
     expect(response.statusCode).toBe(204)
@@ -100,12 +104,12 @@ describe('Edit Question (E2E)', () => {
     expect(attachmentsOnDatabase).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          id: fakeAttachment1.id.toString()
+          id: fakeAttachment1.id.toString(),
         }),
         expect.objectContaining({
-          id: fakeAttachment3.id.toString()
+          id: fakeAttachment3.id.toString(),
         }),
-      ])
+      ]),
     )
   })
 })
