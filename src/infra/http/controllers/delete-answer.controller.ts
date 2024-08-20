@@ -1,13 +1,17 @@
-import { BadRequestException, Body, Controller, Delete, HttpCode, Param, Put } from '@nestjs/common'
+import {
+  BadRequestException,
+  Controller,
+  Delete,
+  HttpCode,
+  Param,
+} from '@nestjs/common'
 import { CurrentUser } from '../../auth/current-user-decorator'
 import { UserPayload } from '../../auth/jwt.strategy'
-import { ZodValidationPipe } from '../pipes/zod-validation-pipe'
 import { NestDeleteAnswerUseCase } from '../../factories'
-import { z } from 'zod'
 
 @Controller('/answers/:id')
 export class DeleteAnswerController {
-  constructor(private deleteAnswer: NestDeleteAnswerUseCase) { }
+  constructor(private deleteAnswer: NestDeleteAnswerUseCase) {}
 
   @Delete()
   @HttpCode(204)
