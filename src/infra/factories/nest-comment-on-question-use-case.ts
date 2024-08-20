@@ -5,7 +5,10 @@ import { Injectable } from '@nestjs/common'
 
 @Injectable()
 export class NestCommentOnQuestionUseCase extends CommentOnQuestionUseCase {
-  constructor(questionsRepository: QuestionsRepository, questionCommentsRepository: QuestionCommentsRepository) {
+  constructor(
+    questionsRepository: QuestionsRepository,
+    questionCommentsRepository: QuestionCommentsRepository,
+  ) {
     super(questionsRepository, questionCommentsRepository)
   }
 }
