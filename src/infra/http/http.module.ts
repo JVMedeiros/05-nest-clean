@@ -65,7 +65,7 @@ import { UploadAttachmentController } from './controllers/upload-attachment.cont
     DeleteAnswerCommentController,
     FetchQuestionCommentsController,
     FetchAnswerCommentsController,
-    UploadAttachmentController
+    UploadAttachmentController,
   ],
   providers: [
     PrismaService,
@@ -87,7 +87,7 @@ import { UploadAttachmentController } from './controllers/upload-attachment.cont
     NestDeleteAnswerCommentUseCase,
     NestFetchQuestionCommentsUseCase,
     NestFetchAnswerCommentsUseCase,
-    NestUploadAndCreateAttachmentUseCase
+    NestUploadAndCreateAttachmentUseCase,
   ],
 })
-export class HttpModule { }
+export class HttpModule {}
