@@ -30,31 +30,31 @@ import { PrismaStudentsRepository } from './prisma/repositories/prisma-students-
     },
     {
       provide: QuestionsRepository,
-      useClass: PrismaQuestionsRepository
+      useClass: PrismaQuestionsRepository,
     },
     {
       provide: AnswerAttachmentsRepository,
-      useClass: PrismaAnswerAttachmentsRepository
+      useClass: PrismaAnswerAttachmentsRepository,
     },
     {
       provide: AnswerCommentsRepository,
-      useClass: PrismaAnswerCommentsRepository
+      useClass: PrismaAnswerCommentsRepository,
     },
     {
       provide: AnswersRepository,
-      useClass: PrismaAnswersRepository
+      useClass: PrismaAnswersRepository,
     },
     {
       provide: QuestionAttachmentsRepository,
-      useClass: PrismaQuestionAttachmentsRepository
+      useClass: PrismaQuestionAttachmentsRepository,
     },
     {
       provide: QuestionCommentsRepository,
-      useClass: PrismaQuestionCommentsRepository
+      useClass: PrismaQuestionCommentsRepository,
     },
     {
       provide: AttachmentsRepository,
-      useClass: PrismaAttachmentsRepository
+      useClass: PrismaAttachmentsRepository,
     },
   ],
   exports: [
@@ -66,7 +66,7 @@ import { PrismaStudentsRepository } from './prisma/repositories/prisma-students-
     QuestionCommentsRepository,
     QuestionsRepository,
     StudentsRepository,
-    AttachmentsRepository
+    AttachmentsRepository,
   ],
 })
-export class DatabaseModule { }
+export class DatabaseModule {}
