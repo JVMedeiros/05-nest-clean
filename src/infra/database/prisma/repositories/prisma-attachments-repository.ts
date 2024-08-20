@@ -6,7 +6,7 @@ import { PrismaService } from '../prisma.service'
 
 @Injectable()
 export class PrismaAttachmentsRepository implements AttachmentsRepository {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
   async create(attachment: Attachment): Promise<void> {
     const data = PrismaAttachmentMapper.toPersistance(attachment)
 
