@@ -7,7 +7,7 @@ import { Injectable } from '@nestjs/common'
 export class NestUploadAndCreateAttachmentUseCase extends UploadAndCreateAttachmentUseCase {
   constructor(
     attachmentsRepository: AttachmentsRepository,
-    uploader: Uploader
+    uploader: Uploader,
   ) {
     super(attachmentsRepository, uploader)
   }
