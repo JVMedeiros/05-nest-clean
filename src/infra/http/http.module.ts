@@ -22,6 +22,7 @@ import {
   NestFetchQuestionCommentsUseCase,
   NestFetchAnswerCommentsUseCase,
   NestUploadAndCreateAttachmentUseCase,
+  NestReadNotificationUseCase,
 } from '../factories'
 import { StorageModule } from '../storage/storage.module'
 import { AnswerQuestionController } from './controllers/answer-question.controller'
@@ -42,6 +43,7 @@ import { FetchQuestionAnswerController } from './controllers/fetch-question-answ
 import { FetchQuestionCommentsController } from './controllers/fetch-question-comments.controller'
 import { FetchRecentQuestionsController } from './controllers/fetch-recent-questions.controller'
 import { GetQuestionBySlugController } from './controllers/get-question-by-slug.controller'
+import { ReadNotificationController } from './controllers/read-notification.controller'
 import { UploadAttachmentController } from './controllers/upload-attachment.controller'
 
 @Module({
@@ -66,6 +68,7 @@ import { UploadAttachmentController } from './controllers/upload-attachment.cont
     FetchQuestionCommentsController,
     FetchAnswerCommentsController,
     UploadAttachmentController,
+    ReadNotificationController
   ],
   providers: [
     PrismaService,
@@ -88,6 +91,7 @@ import { UploadAttachmentController } from './controllers/upload-attachment.cont
     NestFetchQuestionCommentsUseCase,
     NestFetchAnswerCommentsUseCase,
     NestUploadAndCreateAttachmentUseCase,
+    NestReadNotificationUseCase
   ],
 })
-export class HttpModule {}
+export class HttpModule { }
