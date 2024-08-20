@@ -9,8 +9,9 @@ import { PrismaService } from '../prisma.service'
 
 @Injectable()
 export class PrismaQuestionCommentsRepository
-  implements QuestionCommentsRepository {
-  constructor(private prisma: PrismaService) { }
+  implements QuestionCommentsRepository
+{
+  constructor(private prisma: PrismaService) {}
 
   async create(questionComment: QuestionComment): Promise<void> {
     const data = PrismaQuestionCommentMapper.toPersistance(questionComment)
@@ -50,7 +51,7 @@ export class PrismaQuestionCommentsRepository
   ): Promise<QuestionComment[]> {
     const questionComment = await this.prisma.comment.findMany({
       where: {
-        questionId
+        questionId,
       },
       orderBy: {
         createdAt: 'desc',
@@ -68,10 +69,10 @@ export class PrismaQuestionCommentsRepository
   ): Promise<CommentWithAuthor[]> {
     const questionComment = await this.prisma.comment.findMany({
       where: {
-        questionId
+        questionId,
       },
       include: {
-        author: true
+        author: true,
       },
       orderBy: {
         createdAt: 'desc',
