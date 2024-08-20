@@ -14,7 +14,9 @@ let sut: FetchAnswerCommentsUseCase
 describe('Fetch Answer Comments', () => {
   beforeEach(() => {
     inMemoryStudentsRepository = new InMemoryStudentsRepository()
-    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository(inMemoryStudentsRepository)
+    inMemoryAnswerCommentsRepository = new InMemoryAnswerCommentsRepository(
+      inMemoryStudentsRepository,
+    )
     sut = new FetchAnswerCommentsUseCase(inMemoryAnswerCommentsRepository)
   })
   it('Should be able to fetch recent answer comments', async () => {
@@ -24,15 +26,15 @@ describe('Fetch Answer Comments', () => {
 
     const fakeComment1 = makeAnswerComment({
       answerId: new UniqueEntityID('answer-1'),
-      authorId: student.id
+      authorId: student.id,
     })
     const fakeComment2 = makeAnswerComment({
       answerId: new UniqueEntityID('answer-1'),
-      authorId: student.id
+      authorId: student.id,
     })
     const fakeComment3 = makeAnswerComment({
       answerId: new UniqueEntityID('answer-1'),
-      authorId: student.id
+      authorId: student.id,
     })
     await inMemoryAnswerCommentsRepository.create(fakeComment1)
     await inMemoryAnswerCommentsRepository.create(fakeComment2)
@@ -44,20 +46,21 @@ describe('Fetch Answer Comments', () => {
     })
 
     expect(result.value?.comments).toHaveLength(3)
-    expect(result.value?.comments).toEqual(expect.arrayContaining([
-      expect.objectContaining({
-        author: fakeStudentName,
-        commentId: fakeComment1.id
-      }),
-      expect.objectContaining({
-        author: fakeStudentName,
-        commentId: fakeComment2.id
-      }),
-      expect.objectContaining({
-        author: fakeStudentName,
-        commentId: fakeComment3.id
-      })
-    ])
+    expect(result.value?.comments).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          author: fakeStudentName,
+          commentId: fakeComment1.id,
+        }),
+        expect.objectContaining({
+          author: fakeStudentName,
+          commentId: fakeComment2.id,
+        }),
+        expect.objectContaining({
+          author: fakeStudentName,
+          commentId: fakeComment3.id,
+        }),
+      ]),
     )
   })
 
@@ -67,7 +70,10 @@ describe('Fetch Answer Comments', () => {
     await inMemoryStudentsRepository.items.push(student)
     for (let i = 1; i <= 22; i++) {
       await inMemoryAnswerCommentsRepository.create(
-        makeAnswerComment({ answerId: new UniqueEntityID('answer-1'), authorId: student.id }),
+        makeAnswerComment({
+          answerId: new UniqueEntityID('answer-1'),
+          authorId: student.id,
+        }),
       )
     }
     const result = await sut.execute({
