@@ -18,7 +18,6 @@ describe('Fetch question comments (E2E)', () => {
   let jwt: JwtService
   let prisma: PrismaService
 
-
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
