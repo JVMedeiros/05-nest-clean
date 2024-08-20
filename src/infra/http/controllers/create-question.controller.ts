@@ -8,7 +8,7 @@ import { z } from 'zod'
 const createQuestionBodySchema = z.object({
   title: z.string(),
   content: z.string(),
-  attachments: z.array(z.string().uuid())
+  attachments: z.array(z.string().uuid()),
 })
 
 const bodyValidationPipe = new ZodValidationPipe(createQuestionBodySchema)
@@ -16,7 +16,7 @@ type CreateQuestionBodySchema = z.infer<typeof createQuestionBodySchema>
 
 @Controller('/questions')
 export class CreateQuestionController {
-  constructor(private createQuestion: NestCreateQuestionUseCase) { }
+  constructor(private createQuestion: NestCreateQuestionUseCase) {}
 
   @Post()
   async handle(
@@ -30,7 +30,7 @@ export class CreateQuestionController {
       title,
       content,
       authorId: userId,
-      attachmentsIds: attachments
+      attachmentsIds: attachments,
     })
 
     if (result.isLeft()) {
