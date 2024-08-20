@@ -31,8 +31,8 @@ import { JwtStrategy } from './jwt.strategy'
     EnvService,
     {
       provide: APP_GUARD,
-      useClass: JwtAuthGuard
+      useClass: JwtAuthGuard,
     },
   ],
 })
-export class AuthModule { }
+export class AuthModule {}
