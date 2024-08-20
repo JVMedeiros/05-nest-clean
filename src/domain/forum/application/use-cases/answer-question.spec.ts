@@ -52,12 +52,12 @@ describe('Create Question', () => {
     expect(inMemoryAnswerAttachmentsRepository.items).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          attachmentId: new UniqueEntityID('1')
+          attachmentId: new UniqueEntityID('1'),
         }),
         expect.objectContaining({
-          attachmentId: new UniqueEntityID('2')
+          attachmentId: new UniqueEntityID('2'),
         }),
-      ])
+      ]),
     )
   })
 })
