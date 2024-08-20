@@ -29,7 +29,7 @@ describe('Authenticate Student', () => {
   it('should be able to authenticate a student', async () => {
     const fakeStudentPayload = {
       email: makeRandomEmail(),
-      password: makeRandomString()
+      password: makeRandomString(),
     }
     const student = makeStudent({
       email: fakeStudentPayload.email,
@@ -52,7 +52,7 @@ describe('Authenticate Student', () => {
   it('Should not be able to authenticate a student with wrong email', async () => {
     const fakeStudentPayload = {
       email: makeRandomEmail(),
-      password: makeRandomString()
+      password: makeRandomString(),
     }
 
     makeStudent({
@@ -72,7 +72,7 @@ describe('Authenticate Student', () => {
   it('Should not be able to authenticate a student with wrong password', async () => {
     const fakeStudentPayload = {
       email: makeRandomEmail(),
-      password: makeRandomString()
+      password: makeRandomString(),
     }
 
     makeStudent({
