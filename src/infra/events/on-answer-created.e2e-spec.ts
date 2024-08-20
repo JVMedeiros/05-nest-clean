@@ -9,8 +9,8 @@ import { makeRandomString } from 'test/factories/make-random-string'
 import { StudentFactory } from 'test/factories/make-student'
 import { DatabaseModule } from '@/infra/database/database.module'
 import { QuestionFactory } from 'test/factories/make-question'
-import { AttachmentFactory } from 'test/factories/make-attachment'
 import { waitFor } from 'test/utils/wait-for'
+import { DomainEvents } from '@/core/events/domain-events'
 
 describe('On Answer Created (E2E)', () => {
   let app: INestApplication
@@ -32,6 +32,8 @@ describe('On Answer Created (E2E)', () => {
     questionFactory = moduleRef.get(QuestionFactory)
 
     jwt = moduleRef.get(JwtService)
+
+    DomainEvents.shouldRun = true
 
     await app.init()
   })
