@@ -16,20 +16,22 @@ export class PrismaAnswerAttachmentMapper {
     )
   }
 
-  static toPersistanceUpdateMany(attachments: AnswerAttachment[]): Prisma.AttachmentUpdateManyArgs {
-    const attachmentIds = attachments.map(attachment => {
+  static toPersistanceUpdateMany(
+    attachments: AnswerAttachment[],
+  ): Prisma.AttachmentUpdateManyArgs {
+    const attachmentIds = attachments.map((attachment) => {
       return attachment.attachmentId.toString()
     })
 
     return {
       where: {
         id: {
-          in: attachmentIds
-        }
+          in: attachmentIds,
+        },
       },
       data: {
-        answerId: attachments[0].answerId.toString()
-      }
+        answerId: attachments[0].answerId.toString(),
+      },
     }
   }
 }
