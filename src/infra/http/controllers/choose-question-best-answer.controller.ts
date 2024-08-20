@@ -1,11 +1,19 @@
-import { BadRequestException, Controller, HttpCode, Param, Patch } from '@nestjs/common'
+import {
+  BadRequestException,
+  Controller,
+  HttpCode,
+  Param,
+  Patch,
+} from '@nestjs/common'
 import { CurrentUser } from '../../auth/current-user-decorator'
 import { UserPayload } from '../../auth/jwt.strategy'
 import { NestChooseQuestionBestAnswerUseCase } from '../../factories'
 
 @Controller('/answers/:answerId/choose-as-best')
 export class ChooseQuestionBestAnswerController {
-  constructor(private chooseQuestionBestAnswer: NestChooseQuestionBestAnswerUseCase) { }
+  constructor(
+    private chooseQuestionBestAnswer: NestChooseQuestionBestAnswerUseCase,
+  ) {}
 
   @Patch()
   @HttpCode(204)
