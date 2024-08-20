@@ -7,17 +7,25 @@ import { expect } from 'vitest'
 import { EditQuestionUseCase } from './edit-question'
 import { NotAllowedError } from '@/core/errors/errors/not-allowed-error'
 import { ResourceNotFoundError } from '@/core/errors/errors/resource-not-found'
+import { InMemoryStudentsRepository } from 'test/repositories/in-memory-students-repository'
+import { InMemoryAttachmentsRepository } from 'test/repositories/in-memory-attachments-repository'
 
 let inMemoryQuestionsRepository: InMemoryQuestionsRepository
 let inMemoryQuestionAttachmentsRepository: InMemoryQuestionAttachmentsRepository
+let inMemoryAttachmentsRepository: InMemoryAttachmentsRepository
+let inMemoryStudentsRepository: InMemoryStudentsRepository
 let sut: EditQuestionUseCase
 
 describe('Edit Question', () => {
   beforeEach(() => {
+    inMemoryAttachmentsRepository = new InMemoryAttachmentsRepository()
+    inMemoryStudentsRepository = new InMemoryStudentsRepository()
     inMemoryQuestionAttachmentsRepository =
       new InMemoryQuestionAttachmentsRepository()
     inMemoryQuestionsRepository = new InMemoryQuestionsRepository(
       inMemoryQuestionAttachmentsRepository,
+      inMemoryAttachmentsRepository,
+      inMemoryStudentsRepository,
     )
     sut = new EditQuestionUseCase(
       inMemoryQuestionsRepository,
@@ -131,13 +139,12 @@ describe('Edit Question', () => {
     expect(inMemoryQuestionAttachmentsRepository.items).toEqual(
       expect.arrayContaining([
         expect.objectContaining({
-          attachmentId: new UniqueEntityID('1')
+          attachmentId: new UniqueEntityID('1'),
         }),
         expect.objectContaining({
-          attachmentId: new UniqueEntityID('3')
+          attachmentId: new UniqueEntityID('3'),
         }),
-      ])
+      ]),
     )
-
   })
 })
