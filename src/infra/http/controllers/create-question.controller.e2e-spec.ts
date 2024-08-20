@@ -20,7 +20,7 @@ describe('Create Question (E2E)', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [StudentFactory, AttachmentFactory]
+      providers: [StudentFactory, AttachmentFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
@@ -58,9 +58,8 @@ describe('Create Question (E2E)', () => {
         attachments: [
           fakeAttachment1.id.toString(),
           fakeAttachment2.id.toString(),
-        ]
+        ],
       })
-
 
     const questionOnDatabase = await prisma.question.findFirst({
       where: {
@@ -70,13 +69,12 @@ describe('Create Question (E2E)', () => {
 
     const attachmentsOnDatabase = await prisma.attachment.findMany({
       where: {
-        questionId: questionOnDatabase?.id
-      }
+        questionId: questionOnDatabase?.id,
+      },
     })
 
     expect(response.statusCode).toBe(201)
     expect(questionOnDatabase).toBeTruthy()
     expect(attachmentsOnDatabase).toHaveLength(2)
-
   })
 })
