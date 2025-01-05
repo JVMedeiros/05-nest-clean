@@ -4,7 +4,7 @@ import { QuestionDetailsPresenter } from '@/infra/presenters/question-details-pr
 
 @Controller('/questions/:slug')
 export class GetQuestionBySlugController {
-  constructor(private getQuestionBySlug: NestGetQuestionBySlugUseCase) { }
+  constructor(private getQuestionBySlug: NestGetQuestionBySlugUseCase) {}
 
   @Get()
   async handle(@Param('slug') slug: string) {
