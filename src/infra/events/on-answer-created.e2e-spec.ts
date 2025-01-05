@@ -59,17 +59,16 @@ describe('On Answer Created (E2E)', () => {
       .set('Authorization', `Bearer ${accessToken}`)
       .send({
         content: fakePayload.content,
-        attachments: []
+        attachments: [],
       })
 
     await waitFor(async () => {
       const notificationOnDatabase = await prisma.notification.findFirst({
         where: {
-          recipientId: user.id.toString()
-        }
+          recipientId: user.id.toString(),
+        },
       })
       expect(notificationOnDatabase).not.toBeNull()
     })
-
   })
 })
