@@ -1,13 +1,17 @@
-import { Module } from "@nestjs/common";
-import { DatabaseModule } from "../database/database.module";
-import { NestOnAnswerCreated, NestOnQuestionBestAnswerChosen, NestSendNotificationUseCase } from "../factories";
+import { Module } from '@nestjs/common'
+import { DatabaseModule } from '../database/database.module'
+import {
+  NestOnAnswerCreated,
+  NestOnQuestionBestAnswerChosen,
+  NestSendNotificationUseCase,
+} from '../factories'
 
 @Module({
   imports: [DatabaseModule],
   providers: [
     NestOnAnswerCreated,
     NestOnQuestionBestAnswerChosen,
-    NestSendNotificationUseCase
-  ]
+    NestSendNotificationUseCase,
+  ],
 })
-export class EventsModule { }
+export class EventsModule {}
