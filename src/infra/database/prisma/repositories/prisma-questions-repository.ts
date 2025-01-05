@@ -16,7 +16,7 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
     private prisma: PrismaService,
     private cacheRepository: CacheRepository,
     private questionAttachmentsRepository: QuestionAttachmentsRepository,
-  ) { }
+  ) {}
 
   async create(question: Question): Promise<void> {
     const data = PrismaQuestionMapper.toPersistance(question)
@@ -60,11 +60,10 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
       this.questionAttachmentsRepository.deleteMany(
         question.attachments.getRemovedItems(),
       ),
-      this.cacheRepository.delete(`question:${data.slug}:details`)
+      this.cacheRepository.delete(`question:${data.slug}:details`),
     ])
 
     DomainEvents.dispatchEventsForAggregate(question.id)
-
   }
 
   async findById(id: string): Promise<Question | null> {
@@ -118,7 +117,10 @@ export class PrismaQuestionsRepository implements QuestionsRepository {
       return null
     }
 
-    await this.cacheRepository.set(`question:${slug}:details`, JSON.stringify(question))
+    await this.cacheRepository.set(
+      `question:${slug}:details`,
+      JSON.stringify(question),
+    )
     const questionDetails = PrismaQuestionDetailsMapper.toDomain(question)
 
     return questionDetails
