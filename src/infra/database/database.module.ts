@@ -75,7 +75,7 @@ import { PrismaStudentsRepository } from './prisma/repositories/prisma-students-
     QuestionsRepository,
     StudentsRepository,
     AttachmentsRepository,
-    NotificationsRepository
+    NotificationsRepository,
   ],
 })
-export class DatabaseModule { }
+export class DatabaseModule {}
