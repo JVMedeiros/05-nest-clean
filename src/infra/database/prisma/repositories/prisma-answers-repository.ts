@@ -12,7 +12,7 @@ export class PrismaAnswersRepository implements AnswersRepository {
   constructor(
     private prisma: PrismaService,
     private answerAttachmentsRepository: AnswerAttachmentsRepository,
-  ) { }
+  ) {}
 
   async create(answer: Answer): Promise<void> {
     const data = PrismaAnswerMapper.toPersistance(answer)
