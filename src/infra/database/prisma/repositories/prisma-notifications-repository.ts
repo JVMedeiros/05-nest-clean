@@ -6,7 +6,7 @@ import { Notification } from '@/domain/notification/enterprise/entities/notifica
 
 @Injectable()
 export class PrismaNotificationsRepository implements NotificationsRepository {
-  constructor(private prisma: PrismaService) { }
+  constructor(private prisma: PrismaService) {}
 
   async findById(id: string): Promise<Notification | null> {
     const notification = await this.prisma.notification.findUnique({
