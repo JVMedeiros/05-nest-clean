@@ -48,7 +48,7 @@ describe('Get Question By Slug (E2E)', () => {
     })
     const accessToken = jwt.sign({ sub: fakeUser.id.toString() })
 
-    //TODO: Missing an factory to make a random slug based on question title -> refactor on makeRandomString to generate a non number string? 
+    // TODO: Missing an factory to make a random slug based on question title -> refactor on makeRandomString to generate a non number string?
     const fakeQuestionTitle = makeRandomString()
     const fakeQuestion = await questionFactory.makePrismaQuestion({
       authorId: fakeUser.id,
