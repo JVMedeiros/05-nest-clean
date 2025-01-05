@@ -23,11 +23,7 @@ describe('Get Question By Slug (E2E)', () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       imports: [AppModule, DatabaseModule],
-      providers: [
-        StudentFactory,
-        PrismaService,
-        NotificationFactory
-      ],
+      providers: [StudentFactory, PrismaService, NotificationFactory],
     }).compile()
 
     app = moduleRef.createNestApplication()
@@ -59,8 +55,8 @@ describe('Get Question By Slug (E2E)', () => {
 
     const notificationOnDatabase = await prisma.notification.findFirst({
       where: {
-        recipientId: fakeUser.id.toString()
-      }
+        recipientId: fakeUser.id.toString(),
+      },
     })
 
     expect(response.statusCode).toBe(204)
