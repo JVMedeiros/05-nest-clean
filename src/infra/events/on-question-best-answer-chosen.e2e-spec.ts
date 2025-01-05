@@ -72,8 +72,8 @@ describe('On Question Best Answer Chosen (E2E)', () => {
     await waitFor(async () => {
       const notificationOnDatabase = await prisma.notification.findFirst({
         where: {
-          recipientId: user.id.toString()
-        }
+          recipientId: user.id.toString(),
+        },
       })
       expect(notificationOnDatabase).not.toBeNull()
     })
