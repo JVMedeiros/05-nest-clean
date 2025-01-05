@@ -5,7 +5,10 @@ import { NestSendNotificationUseCase } from './nest-send-notification-use-case'
 
 @Injectable()
 export class NestOnAnswerCreated extends OnAnswerCreated {
-  constructor(questionsRepository: QuestionsRepository, sendNotification: NestSendNotificationUseCase) {
+  constructor(
+    questionsRepository: QuestionsRepository,
+    sendNotification: NestSendNotificationUseCase,
+  ) {
     super(questionsRepository, sendNotification)
   }
 }
